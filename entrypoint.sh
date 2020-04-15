@@ -125,7 +125,7 @@ check_vault()
   fi
   if [ ${retcode} -eq 0 ] 
   then
-     if ! vault token-lookup >/dev/null 2>&1
+     if ! vault token lookup >/dev/null 2>&1
      then
         echo "ERROR: Invalid vault token provided"
         retcode=1
