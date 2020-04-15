@@ -1,0 +1,7 @@
+#
+name: 'template renderer'
+description: 'Generic template rendering action'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  
