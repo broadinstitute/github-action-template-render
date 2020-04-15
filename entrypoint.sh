@@ -2,6 +2,7 @@
 set -xv
 #
 
+
 #  any environment variables necessary for proper rendering (used in ctmpl files)
 #  is assumed to be be set.
 
