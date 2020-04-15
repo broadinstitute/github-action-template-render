@@ -136,6 +136,8 @@ check_vault()
 
 # getopts (maybe)
 
+printenv
+
 # verify DEST_PATH exists and is dir
 if [ ! -d "${DEST_PATH}" ]
 then
