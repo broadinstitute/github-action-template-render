@@ -1,4 +1,5 @@
 #!/bin/bash
+set -xv
 #
 
 #  any environment variables necessary for proper rendering (used in ctmpl files)
@@ -135,8 +136,6 @@ check_vault()
 }
 
 # getopts (maybe)
-
-printenv
 
 # verify DEST_PATH exists and is dir
 if [ ! -d "${DEST_PATH}" ]
