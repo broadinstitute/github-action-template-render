@@ -1,11 +1,15 @@
+# ARG BASE_TAG=0.0.1
+
+# FROM broadinstitute/github-action-template-render:${BASE_TAG}
+
 ARG BASE_TAG=gomplate
-# ARG CONFIG_DIR=.
 
 FROM broadinstitute/configurator-base:${BASE_TAG}
 
-COPY entrypoint.sh /entrypoint.sh
+COPY base-image/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 WORKDIR /working
 
 ENTRYPOINT [ "/entrypoint.sh" ]
+

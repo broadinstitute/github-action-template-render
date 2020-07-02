@@ -1,0 +1,14 @@
+
+log_level = "info"
+
+vault {
+  address = ""
+  token = ""
+  ssl {
+    enabled = true
+    verify = true
+    cert = ""
+    ca_cert = ""
+  }
+}
+
