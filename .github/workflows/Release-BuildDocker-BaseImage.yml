@@ -60,7 +60,7 @@ jobs:
       id: tagName
       uses: olegtarasov/get-tag@v2
       with:
-        tagRegex: "baseimage--(.*)"  
+        tagRegex: "baseimage-(.*)"  
         tagRegexGroup: 1 
 
     # docker build push sha-XXXXX tag
