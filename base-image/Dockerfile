@@ -36,7 +36,7 @@ RUN echo "@community http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /et
     mv consul-template consul-template-legacy && \
     mv consul-template-latest consul-template-legacy vault /usr/local/bin/ && \
     chmod 0755 /usr/local/bin/* && \
-    cd /usr/local && unzip /tmp/google-cloud-sdk.zip && \
+    cd /usr/local && unzip -q /tmp/google-cloud-sdk.zip && \
     google-cloud-sdk/install.sh --usage-reporting=false --path-update=true --bash-completion=true && \
     google-cloud-sdk/bin/gcloud config set --installation component_manager/disable_update_check true && \
     rm -rf /tmp/* && \
