@@ -1,4 +1,4 @@
-name: Build and Push BaseImage Docker
+name: Create New BaseImage docker
 on:
   push:
     branches:
