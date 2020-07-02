@@ -7,7 +7,7 @@ on:
       - baseimage-*
 
 jobs:
-  build-base-image-docker:
+  build-base-image-push-docker:
     runs-on: ubuntu-latest
     steps:
     # checkout
