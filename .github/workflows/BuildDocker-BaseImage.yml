@@ -37,7 +37,7 @@ jobs:
         # use vault token to read secret - dockerhub access token
         DOCKERHUB_PASSWORD=$(curl --silent -H "X-Vault-Token: ${VAULT_TOKEN}" -X GET \
              ${VAULT_ADDR}/v1/secret/dsde/gotc/dev/ci/dsdejenkins-dockerhub \
-             | jq .data.access-token )
+             | jq .data.accesstoken )
         echo ::add-mask::${DOCKERHUB_PASSWORD}
         echo ::set-env name=DOCKERHUB_PASSWORD::${DOCKERHUB_PASSWORD}
         if [ -z "${DOCKERHUB_PASSWORD}" ] ; then
