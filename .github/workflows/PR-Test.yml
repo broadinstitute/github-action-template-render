@@ -25,15 +25,15 @@ jobs:
         push: false
 
     # docker build 
-    - name: Test Build github action docker - NO PUSH
-      id: docker-build
-      uses: docker/build-push-action@v1.1.0
-      with:
-        repository: github-action
-        add_git_labels: true
-        dockerfile: Dockerfile
-        tag_with_ref: true
-        push: false
+#    - name: Test Build github action docker - NO PUSH
+#      id: docker-build
+#      uses: docker/build-push-action@v1.1.0
+#      with:
+#        repository: github-action
+#        add_git_labels: true
+#        dockerfile: Dockerfile
+#        tag_with_ref: true
+#        push: false
 
 
 
