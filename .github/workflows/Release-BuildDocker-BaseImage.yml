@@ -55,13 +55,24 @@ jobs:
            echo "Retrieval of Dockerhub username failed"
            exit 1
         fi
-
+    # get tag  name
     - name: Get tag name
       id: tagName
       uses: olegtarasov/get-tag@v2
       with:
         tagRegex: "baseimage-(.*)"  
         tagRegexGroup: 1 
+
+    # Verify tag is valid
+    - name: Validate tag
+      id: verify-tag
+      run: |
+        # check if tag is null
+        if [ -z "${{ steps.tagName.outputs.tag }}" ]
+        then
+           echo "Git tag is null"
+           exit 1
+        fi
 
     # docker build push sha-XXXXX tag
     - name: Build and Push Docker Images
