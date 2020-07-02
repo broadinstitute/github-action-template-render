@@ -60,7 +60,7 @@ jobs:
     - name: Get tag name
       id: tagName
       run: |
-        TAG_NAME::${GITHUB_REF/refs\/tags\//}
+        TAG_NAME=${GITHUB_REF/refs\/tags\//}
         if [[ ! "${TAG_NAME}" =~ "^baseimage-" ]]
         then
             echo "Tag does not start with baseimage- so not doing anything"
