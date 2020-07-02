@@ -71,11 +71,10 @@ jobs:
       with:
         username: ${{ env.DOCKERHUB_USERNAME }}
         password: ${{ env.DOCKERHUB_PASSWORD }}
-        repository: broadinstitute/github-action-template-render
+        repository: "broadinstitute/github-action-template-render"
         add_git_labels: true
-        dockerfile: base-image/Dockerfile
         path: base-image
-        tag_with_sha: false
+        tag_with_sha: true
         tags: ${{ steps.tagName.outputs.DOCKER_TAG }}
         push: true
 
