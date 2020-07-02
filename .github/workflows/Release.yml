@@ -1,8 +1,10 @@
-name: Create Release
+name: Create Action Release
 on:
   push:
     branches:
       - master
+    paths-ignore:
+      - base-image/**
 
 jobs:
   release-on-push:

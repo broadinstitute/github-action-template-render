@@ -1,0 +1,40 @@
+name: Run all tests on PRs
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    # checkout
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    # docker build 
+    - name: Test Build base-image docker - NO PUSH
+      id: docker-build
+      uses: docker/build-push-action@v1.1.0
+      with:
+        repository: broadinstitute/github-action-template-render
+        add_git_labels: true
+        dockerfile: base-image/Dockerfile
+        tag_with_ref: true
+        path: base-image
+        push: false
+
+    # docker build 
+    - name: Test Build github action docker - NO PUSH
+      id: docker-build
+      uses: docker/build-push-action@v1.1.0
+      with:
+        repository: github-action
+        add_git_labels: true
+        dockerfile: Dockerfile
+        tag_with_ref: true
+        push: false
+
+
+
+
