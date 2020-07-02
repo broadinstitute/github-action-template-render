@@ -14,7 +14,7 @@ jobs:
 
     # docker build 
     - name: Test Build base-image docker - NO PUSH
-      id: docker-build
+      id: docker-build-base-image
       uses: docker/build-push-action@v1.1.0
       with:
         repository: broadinstitute/github-action-template-render
@@ -26,7 +26,7 @@ jobs:
 
     # docker build 
     - name: Test Build github action docker - NO PUSH
-      id: docker-build
+      id: docker-build-gitaction
       uses: docker/build-push-action@v1.1.0
       with:
         repository: github-action

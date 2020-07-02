@@ -56,14 +56,12 @@ jobs:
            exit 1
         fi
 
-      - uses: olegtarasov/get-tag@v2
-        id: tagName
-        with:
-          tagRegex: "baseimage--(.*)"  
-          tagRegexGroup: 1 
-      - name: Some other step # Output usage example
-        with:
-          tagname: ${{ steps.tagName.outputs.tag }}
+    - name: Get tag name
+      id: tagName
+      uses: olegtarasov/get-tag@v2
+      with:
+        tagRegex: "baseimage--(.*)"  
+        tagRegexGroup: 1 
 
     # docker build push sha-XXXXX tag
     - name: Build and Push Docker Images
