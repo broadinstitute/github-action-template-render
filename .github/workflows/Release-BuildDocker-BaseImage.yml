@@ -62,7 +62,7 @@ jobs:
         TAG_NAME=${GITHUB_REF/refs\/tags\//}
         # get derived docker tag name
         DOCKER_TAG=${TAG_NAME/baseimage-/}
-        echo ::set-env name=DOCKER_TAG::${DOCKR_TAG}
+        echo ::set-env name=DOCKER_TAG::${DOCKER_TAG}
 
     # docker build push if baseimage- tag provided
     - name: Build and Push Docker Images
