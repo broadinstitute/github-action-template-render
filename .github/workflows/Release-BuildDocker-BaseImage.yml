@@ -1,8 +1,6 @@
 name: Create New BaseImage docker
 on:
   push:
-    branches:
-      - master
     tags:
       - baseimage-*
 
@@ -60,22 +58,15 @@ jobs:
     - name: Get tag name
       id: tagName
       run: |
-        TAG_NAME=${GITHUB_REF/refs\/tags\//}
-        if [[ ! "${TAG_NAME}" =~ "^baseimage-" ]]
-        then
-            echo "Tag does not start with baseimage- so not doing anything"
-            exit 0
-        fi
-        echo ::set-output name=DOCKER_TAG::${TAG_NAME/baseimage-//}
-        if [ -z "${DOCKER_TAG}" ]
-        then
-            echo "baseimage- tag resulted in null string"
-            exit 1
-        fi
+        # get tag name
+        echo ::set-output name=TAG_NAME::${GITHUB_REF/refs\/tags\//}
+        # get derived docker tag name
+        echo ::set-output name=DOCKER_TAG::${TAG_NAME/baseimage-/}
 
     # docker build push if baseimage- tag provided
     - name: Build and Push Docker Images
       id: docker-build
+      if: ${{ steps.tagName.outputs.DOCKER_TAG }} != ${{ steps.tagName.outputs.TAG_NAME }}
       uses: docker/build-push-action@v1.1.0
       with:
         username: ${{ env.DOCKERHUB_USERNAME }}
