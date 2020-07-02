@@ -59,14 +59,14 @@ jobs:
       id: tagName
       run: |
         # get tag name
-        echo ::set-output name=TAG_NAME::${GITHUB_REF/refs\/tags\//}
+        TAG_NAME=${GITHUB_REF/refs\/tags\//}
         # get derived docker tag name
-        echo ::set-output name=DOCKER_TAG::${TAG_NAME/baseimage-/}
+        DOCKER_TAG=${TAG_NAME/baseimage-/}
+        echo ::set-env name=DOCKER_TAG::${DOCKR_TAG}
 
     # docker build push if baseimage- tag provided
     - name: Build and Push Docker Images
       id: docker-build
-      if: ${{ steps.tagName.outputs.DOCKER_TAG }} != ${{ steps.tagName.outputs.TAG_NAME }}
       uses: docker/build-push-action@v1.1.0
       with:
         username: ${{ env.DOCKERHUB_USERNAME }}
@@ -75,7 +75,7 @@ jobs:
         add_git_labels: true
         path: base-image
         tag_with_sha: true
-        tags: ${{ steps.tagName.outputs.DOCKER_TAG }}
+        tags: ${{ env.DOCKER_TAG }}
         push: true
 
 
