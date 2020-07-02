@@ -55,26 +55,25 @@ jobs:
            echo "Retrieval of Dockerhub username failed"
            exit 1
         fi
+
     # get tag  name
     - name: Get tag name
       id: tagName
-      uses: olegtarasov/get-tag@v2
-      with:
-        tagRegex: "baseimage-(.*)"  
-        tagRegexGroup: 1 
-
-    # Verify tag is valid
-    - name: Validate tag
-      id: verify-tag
       run: |
-        # check if tag is null
-        if [ -z "${{ steps.tagName.outputs.tag }}" ]
+        TAG_NAME::${GITHUB_REF/refs\/tags\//}
+        if [[ ! "${TAG_NAME}" =~ "^baseimage-" ]]
         then
-           echo "Git tag is null"
-           exit 1
+            echo "Tag does not start with baseimage- so not doing anything"
+            exit 0
+        fi
+        echo ::set-output name=DOCKER_TAG::${TAG_NAME/baseimage-//}
+        if [ -z "${DOCKER_TAG}" ]
+        then
+            echo "baseimage- tag resulted in null string"
+            exit 1
         fi
 
-    # docker build push sha-XXXXX tag
+    # docker build push if baseimage- tag provided
     - name: Build and Push Docker Images
       id: docker-build
       uses: docker/build-push-action@v1.1.0
@@ -86,7 +85,7 @@ jobs:
         dockerfile: base-image/Dockerfile
         path: base-image
         tag_with_sha: false
-        tags: ${{ steps.tagName.outputs.tag }}
+        tags: ${{ steps.tagName.outputs.DOCKER_TAG }}
         push: true
 
 
